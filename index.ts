@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import connectToDatabase from "./database/connect";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
 const cors = require("cors");
+
+// ROUTES
+import userRouter from "./routes/userRoutes";
 
 dotenv.config();
 
@@ -14,6 +16,8 @@ const corsOptions = {};
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors(corsOptions));
+
+app.use(userRouter);
 
 const startServer = async () => {
   try {
