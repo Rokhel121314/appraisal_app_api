@@ -3,6 +3,7 @@ import {
   addUser,
   loginUser,
   changePassword,
+  logoutUser,
 } from "../controllers/userController";
 import { refreshToken, validateToken } from "../jwt/jwt";
 
@@ -19,5 +20,8 @@ userRouter.put("/user", validateToken, changePassword);
 
 //REFRESH TOKEN
 userRouter.post("/user/refresh", refreshToken);
+
+// LOG OUT USER
+userRouter.delete("/user", logoutUser);
 
 export default userRouter;

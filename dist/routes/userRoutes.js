@@ -15,4 +15,6 @@ userRouter.get("/user", userController_1.loginUser);
 userRouter.put("/user", jwt_1.validateToken, userController_1.changePassword);
 //REFRESH TOKEN
 userRouter.post("/user/refresh", jwt_1.refreshToken);
+// LOG OUT USER
+userRouter.delete("/user", userController_1.logoutUser);
 exports.default = userRouter;

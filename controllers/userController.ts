@@ -112,3 +112,16 @@ export const changePassword = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// LOG OUT USER
+
+export const logoutUser = async (req: Request, res: Response) => {
+  try {
+    res.cookie("access_token", "1");
+    res.cookie("refresh_token", "1");
+
+    res.status(200).json({ message: "USER LOGOUT!" });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};

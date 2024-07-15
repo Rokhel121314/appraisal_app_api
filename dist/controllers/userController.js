@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changePassword = exports.loginUser = exports.addUser = void 0;
+exports.logoutUser = exports.changePassword = exports.loginUser = exports.addUser = void 0;
 const jwt_1 = require("../jwt/jwt");
 const userModel_1 = __importDefault(require("../models/userModel"));
 const bcrypt = require("bcrypt");
@@ -106,3 +106,15 @@ const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.changePassword = changePassword;
+// LOG OUT USER
+const logoutUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        res.cookie("access_token", "1");
+        res.cookie("refresh_token", "1");
+        res.status(200).json({ message: "USER LOGOUT!" });
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+exports.logoutUser = logoutUser;
