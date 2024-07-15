@@ -4,6 +4,7 @@ import {
   loginUser,
   changePassword,
 } from "../controllers/userController";
+import { refreshToken, validateToken } from "../jwt/jwt";
 
 const userRouter = express.Router();
 
@@ -14,6 +15,9 @@ userRouter.post("/user", addUser);
 userRouter.get("/user", loginUser);
 
 // CHANGE PASSWORD
-userRouter.put("/user", changePassword);
+userRouter.put("/user", validateToken, changePassword);
+
+//REFRESH TOKEN
+userRouter.post("/user/refresh", refreshToken);
 
 export default userRouter;

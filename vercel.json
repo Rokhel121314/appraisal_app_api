@@ -10,7 +10,14 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "dist/index.js"
+        "dest": "dist/index.js",
+         "methods": ["GET", "POST"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Authorization, Content-Type",
+          "Set-Cookie": "SameSite=None; Secure; HttpOnly"
+        }
       }
     ]
   }

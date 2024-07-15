@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changePassword = exports.loginUser = exports.addUser = void 0;
+const jwt_1 = require("../jwt/jwt");
 const userModel_1 = __importDefault(require("../models/userModel"));
 const bcrypt = require("bcrypt");
 // ADD USER
@@ -29,7 +30,6 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         else {
             const user = yield userModel_1.default.create(Object.assign(Object.assign({}, userPayload), { password: hashPassword }));
             res.status(200).json(user);
-            console.log(`USER ${user.full_name} HAS SUCCESFULLY REGISTERED!`);
         }
     }
     catch (error) {
@@ -40,7 +40,6 @@ exports.addUser = addUser;
 // LOG IN USER
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    console.log("email:", email, "password:", password);
     try {
         const user = yield userModel_1.default.findOne({ email: email }).exec();
         if (!user) {
@@ -48,11 +47,30 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         else {
             const checkPassword = yield bcrypt.compareSync(password, user.password);
-            console.log("checkPassword", checkPassword);
             if (!checkPassword) {
                 res.status(200).json({ message: "ENTERED WRONG PASSWORD!" });
             }
             else {
+                const accessToken = yield (0, jwt_1.generateToken)({
+                    user_id: user._id.toString(),
+                    email: user.email,
+                });
+                res.cookie("access_token", accessToken, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none",
+                    path: "/",
+                });
+                const refreshToken = yield (0, jwt_1.generateRefreshToken)({
+                    user_id: user._id.toString(),
+                    email: user.email,
+                });
+                res.cookie("refresh_token", refreshToken, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none",
+                    path: "/",
+                });
                 res.status(200).json({
                     email: user.email,
                     role: user.role,
@@ -70,7 +88,6 @@ exports.loginUser = loginUser;
 // CHANGE PASSWORD
 const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, new_password } = req.body;
-    console.log("email", email, "new_password", new_password);
     const hashPassword = yield bcrypt.hashSync(new_password, 10);
     try {
         const exist = yield userModel_1.default.findOne({ email: email }).exec();
@@ -81,7 +98,6 @@ const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
             const user = yield userModel_1.default.updateOne({ email: email }, { $set: { password: hashPassword } });
             if (user.modifiedCount > 0) {
                 res.status(200).json(user);
-                console.log("PASSWORD UPDATED SUCCESSFULLY!");
             }
         }
     }
