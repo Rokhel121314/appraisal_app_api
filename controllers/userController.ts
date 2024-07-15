@@ -1,12 +1,15 @@
+import { generateRefreshToken, generateToken } from "../jwt/jwt";
 import User from "../models/userModel";
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 const bcrypt = require("bcrypt");
 
-type UserType = {
+export type UserType = {
   email: string;
   full_name: string;
   role: string;
   password: string;
+  _id: string;
 };
 
 // ADD USER
@@ -28,7 +31,6 @@ export const addUser = async (req: Request, res: Response) => {
         password: hashPassword,
       });
       res.status(200).json(user);
-      console.log(`USER ${user.full_name} HAS SUCCESFULLY REGISTERED!`);
     }
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -38,7 +40,6 @@ export const addUser = async (req: Request, res: Response) => {
 // LOG IN USER
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password }: { email: string; password: string } = req.body;
-  console.log("email:", email, "password:", password);
 
   try {
     const user = await User.findOne({ email: email }).exec();
@@ -46,11 +47,33 @@ export const loginUser = async (req: Request, res: Response) => {
       res.status(404).json({ message: "ENTERED WRONG EMAIL!" });
     } else {
       const checkPassword = await bcrypt.compareSync(password, user.password);
-      console.log("checkPassword", checkPassword);
 
       if (!checkPassword) {
         res.status(200).json({ message: "ENTERED WRONG PASSWORD!" });
       } else {
+        const accessToken = await generateToken({
+          user_id: user._id.toString(),
+          email: user.email,
+        });
+
+        res.cookie("access_token", accessToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          path: "/",
+        });
+
+        const refreshToken = await generateRefreshToken({
+          user_id: user._id.toString(),
+          email: user.email,
+        });
+
+        res.cookie("refresh_token", refreshToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          path: "/",
+        });
         res.status(200).json({
           email: user.email,
           role: user.role,
@@ -69,7 +92,7 @@ export const loginUser = async (req: Request, res: Response) => {
 export const changePassword = async (req: Request, res: Response) => {
   const { email, new_password }: { email: string; new_password: string } =
     req.body;
-  console.log("email", email, "new_password", new_password);
+
   const hashPassword = await bcrypt.hashSync(new_password, 10);
 
   try {
@@ -83,7 +106,6 @@ export const changePassword = async (req: Request, res: Response) => {
       );
       if (user.modifiedCount > 0) {
         res.status(200).json(user);
-        console.log("PASSWORD UPDATED SUCCESSFULLY!");
       }
     }
   } catch (error: any) {
