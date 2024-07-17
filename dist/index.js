@@ -22,7 +22,11 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
-const corsOptions = {};
+const corsOptions = {
+    credentials: true,
+    origin: "http://localhost:3000",
+    optionSuccessStatus: 200,
+};
 app.use(express_1.default.json({ limit: "50mb" }));
 app.use(express_1.default.urlencoded({ limit: "50mb" }));
 app.use(cors(corsOptions));
