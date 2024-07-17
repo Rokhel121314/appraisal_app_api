@@ -13,7 +13,7 @@ const userRouter = express.Router();
 userRouter.post("/user", addUser);
 
 // LOGIN USER
-userRouter.get("/user", loginUser);
+userRouter.post("/user/login", loginUser);
 
 // CHANGE PASSWORD
 userRouter.put("/user", validateToken, changePassword);
@@ -22,6 +22,6 @@ userRouter.put("/user", validateToken, changePassword);
 userRouter.post("/user/refresh", refreshToken);
 
 // LOG OUT USER
-userRouter.delete("/user", logoutUser);
+userRouter.post("/user/logout", logoutUser);
 
 export default userRouter;

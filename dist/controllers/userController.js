@@ -23,13 +23,18 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const exist = yield userModel_1.default.findOne({ email: userPayload.email }).exec();
         if (exist) {
-            res.status(200).json({
+            res.status(409).json({
                 message: "EMAIL ALREADY IN USE!",
             });
         }
         else {
             const user = yield userModel_1.default.create(Object.assign(Object.assign({}, userPayload), { password: hashPassword }));
-            res.status(200).json(user);
+            res.status(200).json({
+                email: user.email,
+                full_name: user.full_name,
+                role: user.role,
+                user_id: user._id,
+            });
         }
     }
     catch (error) {
@@ -40,6 +45,7 @@ exports.addUser = addUser;
 // LOG IN USER
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    console.log("email:", email);
     try {
         const user = yield userModel_1.default.findOne({ email: email }).exec();
         if (!user) {
@@ -48,7 +54,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         else {
             const checkPassword = yield bcrypt.compareSync(password, user.password);
             if (!checkPassword) {
-                res.status(200).json({ message: "ENTERED WRONG PASSWORD!" });
+                res.status(400).json({ message: "ENTERED WRONG PASSWORD!" });
             }
             else {
                 const accessToken = yield (0, jwt_1.generateToken)({

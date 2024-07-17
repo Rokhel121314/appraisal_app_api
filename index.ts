@@ -12,7 +12,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const corsOptions = {};
+const corsOptions = {
+  credentials: true,
+  origin: "http://localhost:3000",
+  optionSuccessStatus: 200,
+};
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
