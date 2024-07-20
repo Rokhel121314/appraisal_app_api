@@ -44,9 +44,11 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 startServer();
-app.get("/", (req, res, next) => {
+app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
+});
+app.get("/", (req, res) => {
     res.send(`SERVER IS NOW RUNNING`);
 });
