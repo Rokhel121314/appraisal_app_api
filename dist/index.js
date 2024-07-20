@@ -24,7 +24,12 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
 app.use(express_1.default.json({ limit: "50mb" }));
 app.use(express_1.default.urlencoded({ limit: "50mb" }));
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: "*", // whatever ports you used in frontend
+}));
 app.use(cookieParser());
 app.use(userRoutes_1.default);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
