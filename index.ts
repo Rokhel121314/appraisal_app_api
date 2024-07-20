@@ -13,9 +13,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  // credentials: true,
-  // origin: ["https://appraisal-app-ui.vercel.app", "http://localhost:3000"],
-  // optionSuccessStatus: 200,
+  credentials: true,
+  origin: ["https://appraisal-app-ui.vercel.app", "http://localhost:3000"],
+  optionSuccessStatus: 200,
 };
 
 app.use(express.json({ limit: "50mb" }));
