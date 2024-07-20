@@ -13,15 +13,16 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  credentials: true,
   origin: ["https://appraisal-app-ui.vercel.app", "http://localhost:3000"],
-  optionSuccessStatus: 200,
+  methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
+app.use(userRouter);
 
 const startServer = async () => {
   try {
@@ -35,17 +36,6 @@ const startServer = async () => {
 };
 
 startServer();
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-app.use(userRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`SERVER IS NOW RUNNING`);

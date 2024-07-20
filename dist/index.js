@@ -23,14 +23,14 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
 const corsOptions = {
-    credentials: true,
     origin: ["https://appraisal-app-ui.vercel.app", "http://localhost:3000"],
-    optionSuccessStatus: 200,
+    methods: ["GET", "POST", "PUT", "DELETE"],
 };
 app.use(express_1.default.json({ limit: "50mb" }));
 app.use(express_1.default.urlencoded({ limit: "50mb" }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(userRoutes_1.default);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, connect_1.default)();
@@ -43,12 +43,6 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 startServer();
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-app.use(userRoutes_1.default);
 app.get("/", (req, res) => {
     res.send(`SERVER IS NOW RUNNING`);
 });
