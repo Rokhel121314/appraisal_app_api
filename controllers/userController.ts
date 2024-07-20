@@ -86,7 +86,6 @@ export const loginUser = async (req: Request, res: Response) => {
           full_name: user.full_name,
           user_id: user._id,
         });
-        localStorage.setItem("access-token", accessToken);
       }
     }
   } catch (error: any) {

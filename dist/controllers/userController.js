@@ -83,7 +83,6 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     full_name: user.full_name,
                     user_id: user._id,
                 });
-                localStorage.setItem("access-token", accessToken);
             }
         }
     }
