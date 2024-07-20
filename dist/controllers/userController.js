@@ -66,6 +66,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     secure: true,
                     sameSite: "none",
                     path: "/",
+                    partitioned: true,
                 });
                 const refreshToken = yield (0, jwt_1.generateRefreshToken)({
                     user_id: user._id.toString(),
@@ -76,6 +77,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     secure: true,
                     sameSite: "none",
                     path: "/",
+                    partitioned: true,
                 });
                 res.status(200).json({
                     email: user.email,

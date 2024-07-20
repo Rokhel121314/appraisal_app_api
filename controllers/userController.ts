@@ -67,6 +67,7 @@ export const loginUser = async (req: Request, res: Response) => {
           secure: true,
           sameSite: "none",
           path: "/",
+          partitioned: true,
         });
 
         const refreshToken = await generateRefreshToken({
@@ -79,6 +80,7 @@ export const loginUser = async (req: Request, res: Response) => {
           secure: true,
           sameSite: "none",
           path: "/",
+          partitioned: true,
         });
         res.status(200).json({
           email: user.email,
