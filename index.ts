@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
   credentials: true,
-  origin: "https://appraisal-app-api.vercel.app",
+  origin: "https://appraisal-app-ui.vercel.app",
   optionSuccessStatus: 200,
 };
 
