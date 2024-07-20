@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import connectToDatabase from "./database/connect";
 import dotenv from "dotenv";
 const cors = require("cors");
@@ -13,9 +13,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  credentials: true,
-  origin: "https://appraisal-app-ui.vercel.app",
-  optionSuccessStatus: 200,
+  // credentials: true,
+  // origin: ["https://appraisal-app-ui.vercel.app", "http://localhost:3000"],
+  // optionSuccessStatus: 200,
 };
 
 app.use(express.json({ limit: "50mb" }));
@@ -38,6 +38,12 @@ const startServer = async () => {
 
 startServer();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send(`connected to port ${PORT}`);
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+  res.send(`SERVER IS NOW RUNNING`);
 });
