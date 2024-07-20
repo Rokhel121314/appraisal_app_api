@@ -23,8 +23,6 @@ app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
-app.use(userRouter);
-
 const startServer = async () => {
   try {
     await connectToDatabase();
@@ -46,6 +44,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   );
   next();
 });
+
+app.use(userRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`SERVER IS NOW RUNNING`);
