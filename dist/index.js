@@ -21,7 +21,7 @@ const cookieParser = require("cookie-parser");
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const corsOptions = {
     credentials: true,
     origin: "https://appraisal-app-api.vercel.app",
