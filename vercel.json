@@ -11,9 +11,7 @@
       {
         "src": "/(.*)",
         "dest": "dist/index.js",
-         "methods": ["GET", "POST"],
         "headers": {
-    
           "Set-Cookie": "SameSite=None; Secure; HttpOnly"
         }
       }
