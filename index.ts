@@ -19,7 +19,7 @@ app.use(
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     allowedHeaders: ["Content-Type", "Authorization"],
-    origin: ["https://appraisal-app-ui.vercel.app", "http://localhost:3000"], // whatever ports you used in frontend
+    origin: ["appraisal-app.vercel.app", "http://localhost:3000"], // whatever ports you used in frontend
   })
 );
 app.use(cookieParser());
