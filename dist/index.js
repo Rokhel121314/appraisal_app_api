@@ -24,7 +24,7 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
     credentials: true,
-    origin: "*",
+    origin: "https://appraisal-app-api.vercel.app",
     optionSuccessStatus: 200,
 };
 app.use(express_1.default.json({ limit: "50mb" }));
