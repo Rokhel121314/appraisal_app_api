@@ -20,9 +20,8 @@ app.use(
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     allowedHeaders: ["Content-Type", "Authorization"],
     origin: [
-      "https://appraisal-app.vercel.app",
+      "https://www.spallcprocessingportal.com/",
       "http://localhost:3000",
-      "https://www.spallcprocessingportal.com",
     ], // whatever ports you used in frontend
   })
 );
