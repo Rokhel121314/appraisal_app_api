@@ -14,22 +14,17 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
-// app.use(
-//   cors({
-//     credentials: true,
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     origin: [
-//       "https://www.spallcprocessingportal.com/",
-//       "http://localhost:3000",
-//     ], // whatever ports you used in frontend
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: ["https://www.spallcprocessingportal.com", "http://localhost:3000"], // whatever ports you used in frontend
+  })
+);
 app.use(cookieParser());
 
 app.use(userRouter);
-
-app.options("*", cors());
 
 const startServer = async () => {
   try {
