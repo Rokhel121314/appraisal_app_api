@@ -30,6 +30,8 @@ app.use(cookieParser());
 
 app.use(userRouter);
 
+app.options("*", cors());
+
 const startServer = async () => {
   try {
     await connectToDatabase();
