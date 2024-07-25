@@ -28,7 +28,11 @@ app.use(cors({
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     allowedHeaders: ["Content-Type", "Authorization"],
-    origin: ["https://appraisal-app.vercel.app", "http://localhost:3000"], // whatever ports you used in frontend
+    origin: [
+        "https://www.spallcprocessingportal.com",
+        "http://localhost:5173",
+        "https://appraisals-app-ui.vercel.app",
+    ], // whatever ports you used in frontend
 }));
 app.use(cookieParser());
 app.use(userRoutes_1.default);

@@ -19,7 +19,11 @@ app.use(
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     allowedHeaders: ["Content-Type", "Authorization"],
-    origin: ["https://www.spallcprocessingportal.com", "http://localhost:3000"], // whatever ports you used in frontend
+    origin: [
+      "https://www.spallcprocessingportal.com",
+      "http://localhost:5173",
+      "https://appraisals-app-ui.vercel.app",
+    ], // whatever ports you used in frontend
   })
 );
 app.use(cookieParser());
