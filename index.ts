@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 
 // ROUTES
 import userRouter from "./routes/userRoutes";
+import gallagherEntityRouter from "./routes/gallagherEntityRoutes";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(
 app.use(cookieParser());
 
 app.use(userRouter);
+app.use(gallagherEntityRouter);
 
 const startServer = async () => {
   try {

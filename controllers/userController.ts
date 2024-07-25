@@ -1,9 +1,4 @@
-import {
-  generateRefreshToken,
-  generateToken,
-  logoutToken,
-  refreshToken,
-} from "../jwt/jwt";
+import { generateRefreshToken, generateToken, logoutToken } from "../jwt/jwt";
 import User from "../models/userModel";
 import { Request, Response } from "express";
 const bcrypt = require("bcrypt");
