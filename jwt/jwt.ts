@@ -52,7 +52,7 @@ export const validateToken = (
   }
 };
 
-// REFRESH TOKEN
+// GENERATE REFRESH TOKEN
 
 export const generateRefreshToken = ({
   user_id: user_id,
@@ -107,4 +107,16 @@ export const refreshToken = (
       res.status(500).json({ message: error.message });
     }
   }
+};
+
+// LOGGED OUT TOKEN
+
+export const logoutToken = () => {
+  const refreshToken = jwt.sign({}, REFRESH_TOKEN_SECRET as string, {
+    expiresIn: "1s",
+  });
+  const accessToken = jwt.sign({}, REFRESH_TOKEN_SECRET as string, {
+    expiresIn: "1s",
+  });
+  return [accessToken, refreshToken];
 };

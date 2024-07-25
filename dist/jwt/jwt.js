@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.refreshToken = exports.generateRefreshToken = exports.validateToken = exports.generateToken = void 0;
+exports.logoutToken = exports.refreshToken = exports.generateRefreshToken = exports.validateToken = exports.generateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -35,7 +35,7 @@ const validateToken = (req, res, next) => {
     }
 };
 exports.validateToken = validateToken;
-// REFRESH TOKEN
+// GENERATE REFRESH TOKEN
 const generateRefreshToken = ({ user_id: user_id, email: email, }) => {
     const token = jsonwebtoken_1.default.sign({ user_id, email }, REFRESH_TOKEN_SECRET, {
         expiresIn: "12h",
@@ -75,3 +75,14 @@ const refreshToken = (req, res, next) => {
     }
 };
 exports.refreshToken = refreshToken;
+// LOGGED OUT TOKEN
+const logoutToken = () => {
+    const refreshToken = jsonwebtoken_1.default.sign({}, REFRESH_TOKEN_SECRET, {
+        expiresIn: "1s",
+    });
+    const accessToken = jsonwebtoken_1.default.sign({}, REFRESH_TOKEN_SECRET, {
+        expiresIn: "1s",
+    });
+    return [accessToken, refreshToken];
+};
+exports.logoutToken = logoutToken;

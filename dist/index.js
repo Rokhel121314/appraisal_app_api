@@ -26,12 +26,12 @@ app.use(express_1.default.json({ limit: "50mb" }));
 app.use(express_1.default.urlencoded({ limit: "50mb" }));
 app.use(cors({
     credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     origin: [
         "https://www.spallcprocessingportal.com",
         "http://localhost:5173",
-        "https://appraisals-app-ui.vercel.app",
+        // "https://appraisals-app-ui.vercel.app",
     ], // whatever ports you used in frontend
 }));
 app.use(cookieParser());

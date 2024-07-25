@@ -1,4 +1,9 @@
-import { generateRefreshToken, generateToken } from "../jwt/jwt";
+import {
+  generateRefreshToken,
+  generateToken,
+  logoutToken,
+  refreshToken,
+} from "../jwt/jwt";
 import User from "../models/userModel";
 import { Request, Response } from "express";
 const bcrypt = require("bcrypt");
@@ -125,8 +130,22 @@ export const changePassword = async (req: Request, res: Response) => {
 
 export const logoutUser = async (req: Request, res: Response) => {
   try {
-    res.cookie("access_token", "1");
-    res.cookie("refresh_token", "1");
+    const [accessToken, refreshToken] = await logoutToken();
+    res.cookie("access_token", accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      partitioned: true,
+    });
+
+    res.cookie("refresh_token", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      partitioned: true,
+    });
 
     res.status(200).json({ message: "USER LOGOUT!" });
   } catch (error: any) {

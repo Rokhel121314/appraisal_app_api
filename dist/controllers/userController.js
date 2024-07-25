@@ -117,8 +117,21 @@ exports.changePassword = changePassword;
 // LOG OUT USER
 const logoutUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.cookie("access_token", "1");
-        res.cookie("refresh_token", "1");
+        const [accessToken, refreshToken] = yield (0, jwt_1.logoutToken)();
+        res.cookie("access_token", accessToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
+            partitioned: true,
+        });
+        res.cookie("refresh_token", refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
+            partitioned: true,
+        });
         res.status(200).json({ message: "USER LOGOUT!" });
     }
     catch (error) {
