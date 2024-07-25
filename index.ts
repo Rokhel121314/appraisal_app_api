@@ -21,8 +21,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
     origin: [
       "https://www.spallcprocessingportal.com",
-      "http://localhost:5173",
-      "https://appraisals-app-ui.vercel.app",
+      // "http://localhost:5173",
+      // "https://appraisals-app-ui.vercel.app",
     ], // whatever ports you used in frontend
   })
 );
