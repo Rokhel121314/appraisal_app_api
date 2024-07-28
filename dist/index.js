@@ -20,6 +20,7 @@ const cookieParser = require("cookie-parser");
 // ROUTES
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const gallagherEntityRoutes_1 = __importDefault(require("./routes/gallagherEntityRoutes"));
+const gallagherSiteRoutes_1 = __importDefault(require("./routes/gallagherSiteRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
@@ -38,6 +39,7 @@ app.use(cors({
 app.use(cookieParser());
 app.use(userRoutes_1.default);
 app.use(gallagherEntityRoutes_1.default);
+app.use(gallagherSiteRoutes_1.default);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, connect_1.default)();

@@ -1,0 +1,242 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+mongoose_1.default.set("strictQuery", true);
+const gallagherSiteSchema = new mongoose_1.default.Schema({
+    entity_site_building_number: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    site_number: {
+        type: String,
+        required: true,
+    },
+    site_name: {
+        type: String,
+        required: true,
+    },
+    site_address: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    city: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    state: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    zip: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    building_number: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    building_name: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    building_address: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    latitude: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    longitude: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    sov_rcn: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    sov_construction_class: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    sov_area: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    inspection_date: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    year_built: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    building_use: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    stories: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    average_height: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    area_main: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    area_basement: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    area_total: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    frame_type: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    iso_class: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    structural_floor_frame: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    foundation_type: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    building_service_system: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    roof_cover_material: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    roof_frame: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    roof_age: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    roof_geometry: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    exterior_walltype_1: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    exterior_walltype_2: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    exterior_walltype_3: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    fire_sprinklers: {
+        type: Boolean,
+        required: false,
+    },
+    firealarms_manual: {
+        type: Boolean,
+        required: false,
+    },
+    firealarms_automatic: {
+        type: Boolean,
+        required: false,
+    },
+    smoke_detector: {
+        type: Boolean,
+        required: false,
+    },
+    fire_extinguishers: {
+        type: Boolean,
+        required: false,
+    },
+    emergency_exit_lights: {
+        type: Boolean,
+        required: false,
+    },
+    additional_features: {
+        type: String,
+        required: false,
+    },
+    cost_new: {
+        type: Number,
+        required: false,
+    },
+    cost_new_less_exclusions: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    exclusions: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    rcn_per_area: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+    bvs_type: {
+        type: String,
+        required: false,
+        enum: ["Reconstruction", "Replacement"],
+    },
+    entity_id: {
+        type: String,
+        required: true,
+    },
+}, {
+    timestamps: true,
+});
+const GallagherSite = mongoose_1.default.model("gallagherSite", gallagherSiteSchema);
+exports.default = GallagherSite;
