@@ -45,7 +45,6 @@ exports.addUser = addUser;
 // LOG IN USER
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    console.log("email:", email);
     try {
         const user = yield userModel_1.default.findOne({ email: email }).exec();
         if (!user) {

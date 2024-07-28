@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logoutToken = exports.refreshToken = exports.generateRefreshToken = exports.validateToken = exports.generateToken = void 0;
+exports.logoutToken = exports.validateToken = exports.refreshToken = exports.generateRefreshToken = exports.generateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -12,29 +12,11 @@ const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRETE_KEY;
 // GENERATE TOKEN
 const generateToken = ({ user_id: user_id, email: email, }) => {
     const token = jsonwebtoken_1.default.sign({ user_id, email }, ACCESS_TOKEN_SECRET, {
-        expiresIn: "10m",
+        expiresIn: "15m",
     });
     return token;
 };
 exports.generateToken = generateToken;
-// VERIFY TOKEN
-const validateToken = (req, res, next) => {
-    const token = req.cookies["access_token"];
-    if (!token) {
-        return res.status(403).json({ message: "USER NOT AUTHENTICATED!" });
-    }
-    else {
-        try {
-            const user = jsonwebtoken_1.default.verify(token, ACCESS_TOKEN_SECRET);
-            req.user = user;
-            next();
-        }
-        catch (error) {
-            res.status(401).json({ message: "You are not authenticated!" });
-        }
-    }
-};
-exports.validateToken = validateToken;
 // GENERATE REFRESH TOKEN
 const generateRefreshToken = ({ user_id: user_id, email: email, }) => {
     const token = jsonwebtoken_1.default.sign({ user_id, email }, REFRESH_TOKEN_SECRET, {
@@ -60,12 +42,24 @@ const refreshToken = (req, res, next) => {
                     user_id: user.user_id,
                     email: user.email,
                 });
-                res.cookie("access_token", accessToken);
+                res.cookie("access_token", accessToken, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none",
+                    path: "/",
+                    partitioned: true,
+                });
                 const refreshToken = (0, exports.generateRefreshToken)({
                     user_id: user.user_id,
                     email: user.email,
                 });
-                res.cookie("refresh_token", refreshToken);
+                res.cookie("refresh_token", refreshToken, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none",
+                    path: "/",
+                    partitioned: true,
+                });
                 res.status(200).json({ message: "TOKEN REFRESHED!" });
             }
         }
@@ -75,6 +69,24 @@ const refreshToken = (req, res, next) => {
     }
 };
 exports.refreshToken = refreshToken;
+// VERIFY TOKEN
+const validateToken = (req, res, next) => {
+    const token = req.cookies["access_token"];
+    if (!token) {
+        return res.status(403).json({ message: "USER NOT AUTHENTICATED!" });
+    }
+    else {
+        try {
+            const user = jsonwebtoken_1.default.verify(token, ACCESS_TOKEN_SECRET);
+            req.user = user;
+            next();
+        }
+        catch (error) {
+            res.status(401).json({ message: "You are not authenticated!" });
+        }
+    }
+};
+exports.validateToken = validateToken;
 // LOGGED OUT TOKEN
 const logoutToken = () => {
     const refreshToken = jsonwebtoken_1.default.sign({}, REFRESH_TOKEN_SECRET, {
