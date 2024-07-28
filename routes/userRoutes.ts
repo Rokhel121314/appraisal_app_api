@@ -19,7 +19,7 @@ userRouter.post("/user/login", loginUser);
 userRouter.put("/user", validateToken, changePassword);
 
 //REFRESH TOKEN
-userRouter.post("/user/refresh", refreshToken);
+userRouter.get("/user/renew", refreshToken);
 
 // LOG OUT USER
 userRouter.post("/user/logout", logoutUser);

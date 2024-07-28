@@ -1,9 +1,4 @@
-import {
-  generateRefreshToken,
-  generateToken,
-  logoutToken,
-  refreshToken,
-} from "../jwt/jwt";
+import { generateRefreshToken, generateToken, logoutToken } from "../jwt/jwt";
 import User from "../models/userModel";
 import { Request, Response } from "express";
 const bcrypt = require("bcrypt");
@@ -49,8 +44,6 @@ export const addUser = async (req: Request, res: Response) => {
 // LOG IN USER
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password }: { email: string; password: string } = req.body;
-
-  console.log("email:", email);
 
   try {
     const user = await User.findOne({ email: email }).exec();

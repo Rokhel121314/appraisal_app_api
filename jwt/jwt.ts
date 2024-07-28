@@ -22,34 +22,9 @@ export const generateToken = ({
   email: string;
 }) => {
   const token = jwt.sign({ user_id, email }, ACCESS_TOKEN_SECRET as string, {
-    expiresIn: "10m",
+    expiresIn: "15m",
   });
   return token;
-};
-
-// VERIFY TOKEN
-export const validateToken = (
-  req: CustomRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  const token = req.cookies["access_token"];
-
-  if (!token) {
-    return res.status(403).json({ message: "USER NOT AUTHENTICATED!" });
-  } else {
-    try {
-      const user = jwt.verify(token, ACCESS_TOKEN_SECRET as string) as {
-        user_id: string;
-        email: string;
-      };
-      req.user = user;
-
-      next();
-    } catch (error) {
-      res.status(401).json({ message: "You are not authenticated!" });
-    }
-  }
 };
 
 // GENERATE REFRESH TOKEN
@@ -92,14 +67,25 @@ export const refreshToken = (
           email: user.email,
         });
 
-        res.cookie("access_token", accessToken);
+        res.cookie("access_token", accessToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          path: "/",
+          partitioned: true,
+        });
 
         const refreshToken = generateRefreshToken({
           user_id: user.user_id,
           email: user.email,
         });
-
-        res.cookie("refresh_token", refreshToken);
+        res.cookie("refresh_token", refreshToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          path: "/",
+          partitioned: true,
+        });
 
         res.status(200).json({ message: "TOKEN REFRESHED!" });
       }
@@ -109,6 +95,30 @@ export const refreshToken = (
   }
 };
 
+// VERIFY TOKEN
+export const validateToken = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.cookies["access_token"];
+
+  if (!token) {
+    return res.status(403).json({ message: "USER NOT AUTHENTICATED!" });
+  } else {
+    try {
+      const user = jwt.verify(token, ACCESS_TOKEN_SECRET as string) as {
+        user_id: string;
+        email: string;
+      };
+      req.user = user;
+
+      next();
+    } catch (error) {
+      res.status(401).json({ message: "You are not authenticated!" });
+    }
+  }
+};
 // LOGGED OUT TOKEN
 
 export const logoutToken = () => {
