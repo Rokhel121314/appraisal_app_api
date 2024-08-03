@@ -180,28 +180,28 @@ const gallagherSiteSchema = new mongoose.Schema(
       default: "",
     },
     fire_sprinklers: {
-      type: Boolean,
+      type: String,
       required: false,
     },
     firealarms_manual: {
-      type: Boolean,
+      type: String,
       required: false,
     },
     firealarms_automatic: {
-      type: Boolean,
+      type: String,
       required: false,
     },
 
     smoke_detector: {
-      type: Boolean,
+      type: String,
       required: false,
     },
     fire_extinguishers: {
-      type: Boolean,
+      type: String,
       required: false,
     },
     emergency_exit_lights: {
-      type: Boolean,
+      type: String,
       required: false,
     },
     additional_features: {

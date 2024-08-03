@@ -34,12 +34,12 @@ export type GallagherSiteType = {
   exterior_walltype_1: string;
   exterior_walltype_2: string;
   exterior_walltype_3: string;
-  fire_sprinklers: boolean;
-  firealarms_manual: boolean;
-  firealarms_automatic: boolean;
-  smoke_detector: boolean;
-  fire_extinguishers: boolean;
-  emergency_exit_lights: boolean;
+  fire_sprinklers: string;
+  firealarms_manual: string;
+  firealarms_automatic: string;
+  smoke_detector: string;
+  fire_extinguishers: string;
+  emergency_exit_lights: string;
   additional_features: string;
   cost_new: number;
   cost_new_less_exclusions: number;
