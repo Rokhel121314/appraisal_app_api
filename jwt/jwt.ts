@@ -22,7 +22,7 @@ export const generateToken = ({
   email: string;
 }) => {
   const token = jwt.sign({ user_id, email }, ACCESS_TOKEN_SECRET as string, {
-    expiresIn: "15m",
+    expiresIn: "12h",
   });
   return token;
 };
