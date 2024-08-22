@@ -179,6 +179,26 @@ const gallagherSiteSchema = new mongoose_1.default.Schema({
         required: false,
         default: "",
     },
+    partition_wall_structure: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    partition_wall_finish: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    floor_finish: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    ceiling_finish: {
+        type: String,
+        required: false,
+        default: "",
+    },
     fire_sprinklers: {
         type: String,
         required: false,

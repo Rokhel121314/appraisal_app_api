@@ -12,7 +12,7 @@ const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRETE_KEY;
 // GENERATE TOKEN
 const generateToken = ({ user_id: user_id, email: email, }) => {
     const token = jsonwebtoken_1.default.sign({ user_id, email }, ACCESS_TOKEN_SECRET, {
-        expiresIn: "15m",
+        expiresIn: "12h",
     });
     return token;
 };

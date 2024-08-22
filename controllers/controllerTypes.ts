@@ -34,6 +34,10 @@ export type GallagherSiteType = {
   exterior_walltype_1: string;
   exterior_walltype_2: string;
   exterior_walltype_3: string;
+  partition_wall_structure: string;
+  partition_wall_finish: string;
+  floor_finish: string;
+  ceiling_finish: string;
   fire_sprinklers: string;
   firealarms_manual: string;
   firealarms_automatic: string;
