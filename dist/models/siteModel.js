@@ -8,7 +8,7 @@ mongoose_1.default.set("strictQuery", true);
 const gallagherSiteSchema = new mongoose_1.default.Schema({
     entity_site_building_number: {
         type: String,
-        required: false,
+        required: true,
         default: "",
     },
     site_number: {
