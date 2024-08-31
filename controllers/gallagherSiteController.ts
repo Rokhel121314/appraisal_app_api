@@ -258,8 +258,12 @@ export const viewGallagherSiteOfEntity = async (
     if (!sites) {
       res.status(404).json({ message: "NO SITES FOUND!" });
     } else {
+      const filtered_sites_list = sites.sort((a, b) =>
+        a.entity_site_building_number > b.entity_site_building_number ? 1 : -1
+      );
+
       res.status(200).json(
-        sites.map((site) => {
+        filtered_sites_list.map((site) => {
           return {
             entity_site_building_number: site.entity_site_building_number,
             site_number: site.site_number,

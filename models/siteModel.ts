@@ -5,7 +5,7 @@ const gallagherSiteSchema = new mongoose.Schema(
   {
     entity_site_building_number: {
       type: String,
-      required: false,
+      required: true,
       default: "",
     },
     site_number: {
