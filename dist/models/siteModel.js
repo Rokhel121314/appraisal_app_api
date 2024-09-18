@@ -6,11 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 mongoose_1.default.set("strictQuery", true);
 const gallagherSiteSchema = new mongoose_1.default.Schema({
-    entity_site_building_number: {
-        type: String,
-        required: true,
-        default: "",
-    },
     site_number: {
         type: String,
         required: true,
@@ -95,7 +90,7 @@ const gallagherSiteSchema = new mongoose_1.default.Schema({
         default: "",
     },
     stories: {
-        type: Number,
+        type: String,
         required: false,
         default: 0,
     },
@@ -241,6 +236,30 @@ const gallagherSiteSchema = new mongoose_1.default.Schema({
         required: false,
         default: 0,
     },
+    other_valuation_1: {
+        valuation_name: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        valuation_amount: {
+            type: Number,
+            required: false,
+            default: 0,
+        },
+    },
+    other_valuation_2: {
+        valuation_name: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        valuation_amount: {
+            type: Number,
+            required: false,
+            default: 0,
+        },
+    },
     rcn_per_area: {
         type: Number,
         required: false,
@@ -250,6 +269,42 @@ const gallagherSiteSchema = new mongoose_1.default.Schema({
         type: String,
         required: false,
         enum: ["Reconstruction", "Replacement"],
+    },
+    writeup_image_file: {
+        image_name: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        image_url: {
+            type: String,
+            required: false,
+            default: "",
+        },
+    },
+    bvs_file: {
+        pdf_name: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        pdf_url: {
+            type: String,
+            required: false,
+            default: "",
+        },
+    },
+    image_file: {
+        image_name: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        image_url: {
+            type: String,
+            required: false,
+            default: "",
+        },
     },
     entity_id: {
         type: String,

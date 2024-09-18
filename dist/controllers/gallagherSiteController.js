@@ -16,11 +16,11 @@ exports.viewGallagherSiteOfEntity = exports.deleteGallagherSite = exports.addMan
 const siteModel_1 = __importDefault(require("../models/siteModel"));
 // ADD SITE
 const addGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     const payload = req.body;
     try {
         const site = yield siteModel_1.default.create(payload);
         res.status(200).json({
-            entity_site_building_number: site.entity_site_building_number,
             site_number: site.site_number,
             site_name: site.site_name,
             site_address: site.site_address,
@@ -71,6 +71,26 @@ const addGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, functio
             exclusions: site.exclusions,
             rcn_per_area: site.rcn_per_area,
             bvs_type: site.bvs_type,
+            other_valuation_1: {
+                valuation_name: (_a = site.other_valuation_1) === null || _a === void 0 ? void 0 : _a.valuation_name,
+                valuation_amount: (_b = site.other_valuation_1) === null || _b === void 0 ? void 0 : _b.valuation_amount,
+            },
+            other_valuation_2: {
+                valuation_name: (_c = site.other_valuation_2) === null || _c === void 0 ? void 0 : _c.valuation_name,
+                valuation_amount: (_d = site.other_valuation_2) === null || _d === void 0 ? void 0 : _d.valuation_amount,
+            },
+            writeup_image_file: {
+                image_name: (_e = site.writeup_image_file) === null || _e === void 0 ? void 0 : _e.image_name,
+                image_url: (_f = site.writeup_image_file) === null || _f === void 0 ? void 0 : _f.image_url,
+            },
+            image_file: {
+                image_name: (_g = site.image_file) === null || _g === void 0 ? void 0 : _g.image_name,
+                image_url: (_h = site.image_file) === null || _h === void 0 ? void 0 : _h.image_url,
+            },
+            bvs_file: {
+                image_name: (_j = site.bvs_file) === null || _j === void 0 ? void 0 : _j.pdf_name,
+                image_url: (_k = site.bvs_file) === null || _k === void 0 ? void 0 : _k.pdf_url,
+            },
             entity_id: site.entity_id,
             date_created: site.createdAt,
             date_updated: site.updatedAt,
@@ -84,6 +104,7 @@ const addGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, functio
 exports.addGallagherSite = addGallagherSite;
 // UPDATE SITE
 const updateGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     const { site_id } = req.params;
     const payload = req.body;
     try {
@@ -98,7 +119,6 @@ const updateGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, func
         }
         else {
             res.status(200).json({
-                entity_site_building_number: site.entity_site_building_number,
                 site_number: site.site_number,
                 site_name: site.site_name,
                 site_address: site.site_address,
@@ -149,6 +169,26 @@ const updateGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, func
                 exclusions: site.exclusions,
                 rcn_per_area: site.rcn_per_area,
                 bvs_type: site.bvs_type,
+                other_valuation_1: {
+                    valuation_name: (_a = site.other_valuation_1) === null || _a === void 0 ? void 0 : _a.valuation_name,
+                    valuation_amount: (_b = site.other_valuation_1) === null || _b === void 0 ? void 0 : _b.valuation_amount,
+                },
+                other_valuation_2: {
+                    valuation_name: (_c = site.other_valuation_2) === null || _c === void 0 ? void 0 : _c.valuation_name,
+                    valuation_amount: (_d = site.other_valuation_2) === null || _d === void 0 ? void 0 : _d.valuation_amount,
+                },
+                writeup_image_file: {
+                    image_name: (_e = site.writeup_image_file) === null || _e === void 0 ? void 0 : _e.image_name,
+                    image_url: (_f = site.writeup_image_file) === null || _f === void 0 ? void 0 : _f.image_url,
+                },
+                image_file: {
+                    image_name: (_g = site.image_file) === null || _g === void 0 ? void 0 : _g.image_name,
+                    image_url: (_h = site.image_file) === null || _h === void 0 ? void 0 : _h.image_url,
+                },
+                bvs_file: {
+                    image_name: (_j = site.bvs_file) === null || _j === void 0 ? void 0 : _j.pdf_name,
+                    image_url: (_k = site.bvs_file) === null || _k === void 0 ? void 0 : _k.pdf_url,
+                },
                 entity_id: site.entity_id,
                 date_created: site.createdAt,
                 date_updated: site.updatedAt,
@@ -167,8 +207,8 @@ const addManyGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, fun
     try {
         const manySites = yield siteModel_1.default.insertMany(payload);
         res.status(200).json(manySites.map((site) => {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
             return {
-                entity_site_building_number: site.entity_site_building_number,
                 site_number: site.site_number,
                 site_name: site.site_name,
                 site_address: site.site_address,
@@ -219,6 +259,26 @@ const addManyGallagherSite = (req, res) => __awaiter(void 0, void 0, void 0, fun
                 exclusions: site.exclusions,
                 rcn_per_area: site.rcn_per_area,
                 bvs_type: site.bvs_type,
+                other_valuation_1: {
+                    valuation_name: (_a = site.other_valuation_1) === null || _a === void 0 ? void 0 : _a.valuation_name,
+                    valuation_amount: (_b = site.other_valuation_1) === null || _b === void 0 ? void 0 : _b.valuation_amount,
+                },
+                other_valuation_2: {
+                    valuation_name: (_c = site.other_valuation_2) === null || _c === void 0 ? void 0 : _c.valuation_name,
+                    valuation_amount: (_d = site.other_valuation_2) === null || _d === void 0 ? void 0 : _d.valuation_amount,
+                },
+                writeup_image_file: {
+                    image_name: (_e = site.writeup_image_file) === null || _e === void 0 ? void 0 : _e.image_name,
+                    image_url: (_f = site.writeup_image_file) === null || _f === void 0 ? void 0 : _f.image_url,
+                },
+                image_file: {
+                    image_name: (_g = site.image_file) === null || _g === void 0 ? void 0 : _g.image_name,
+                    image_url: (_h = site.image_file) === null || _h === void 0 ? void 0 : _h.image_url,
+                },
+                bvs_file: {
+                    image_name: (_j = site.bvs_file) === null || _j === void 0 ? void 0 : _j.pdf_name,
+                    image_url: (_k = site.bvs_file) === null || _k === void 0 ? void 0 : _k.pdf_url,
+                },
                 entity_id: site.entity_id,
                 date_created: site.createdAt,
                 date_updated: site.updatedAt,
@@ -259,10 +319,10 @@ const viewGallagherSiteOfEntity = (req, res) => __awaiter(void 0, void 0, void 0
             res.status(404).json({ message: "NO SITES FOUND!" });
         }
         else {
-            const filtered_sites_list = sites.sort((a, b) => a.entity_site_building_number > b.entity_site_building_number ? 1 : -1);
+            const filtered_sites_list = sites.sort((a, b) => a.site_number > b.site_number ? 1 : -1);
             res.status(200).json(filtered_sites_list.map((site) => {
+                var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
                 return {
-                    entity_site_building_number: site.entity_site_building_number,
                     site_number: site.site_number,
                     site_name: site.site_name,
                     site_address: site.site_address,
@@ -313,6 +373,26 @@ const viewGallagherSiteOfEntity = (req, res) => __awaiter(void 0, void 0, void 0
                     exclusions: site.exclusions,
                     rcn_per_area: site.rcn_per_area,
                     bvs_type: site.bvs_type,
+                    other_valuation_1: {
+                        valuation_name: (_a = site.other_valuation_1) === null || _a === void 0 ? void 0 : _a.valuation_name,
+                        valuation_amount: (_b = site.other_valuation_1) === null || _b === void 0 ? void 0 : _b.valuation_amount,
+                    },
+                    other_valuation_2: {
+                        valuation_name: (_c = site.other_valuation_2) === null || _c === void 0 ? void 0 : _c.valuation_name,
+                        valuation_amount: (_d = site.other_valuation_2) === null || _d === void 0 ? void 0 : _d.valuation_amount,
+                    },
+                    writeup_image_file: {
+                        image_name: (_e = site.writeup_image_file) === null || _e === void 0 ? void 0 : _e.image_name,
+                        image_url: (_f = site.writeup_image_file) === null || _f === void 0 ? void 0 : _f.image_url,
+                    },
+                    image_file: {
+                        image_name: (_g = site.image_file) === null || _g === void 0 ? void 0 : _g.image_name,
+                        image_url: (_h = site.image_file) === null || _h === void 0 ? void 0 : _h.image_url,
+                    },
+                    bvs_file: {
+                        image_name: (_j = site.bvs_file) === null || _j === void 0 ? void 0 : _j.pdf_name,
+                        image_url: (_k = site.bvs_file) === null || _k === void 0 ? void 0 : _k.pdf_url,
+                    },
                     entity_id: site.entity_id,
                     date_created: site.createdAt,
                     date_updated: site.updatedAt,

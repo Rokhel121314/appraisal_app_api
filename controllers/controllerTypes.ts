@@ -1,5 +1,4 @@
 export type GallagherSiteType = {
-  entity_site_building_number: string;
   site_number: string;
   site_name: string;
   site_address: string;
@@ -17,7 +16,7 @@ export type GallagherSiteType = {
   inspection_date: string;
   year_built: string;
   building_use: string;
-  stories: number;
+  stories: string;
   average_height: number;
   area_main: number;
   area_basement: number;
@@ -48,7 +47,27 @@ export type GallagherSiteType = {
   cost_new: number;
   cost_new_less_exclusions: number;
   exclusions: number;
+  other_valuation_1: {
+    valuation_name: string;
+    valuation_amount: number;
+  };
+  other_valuation_2: {
+    valuation_name: string;
+    valuation_amount: number;
+  };
   rcn_per_area: number;
   bvs_type: string;
+  writeup_image_file: {
+    image_name: string;
+    image_url: string;
+  };
+  bvs_file: {
+    pdf_name: string;
+    pdf_url: string;
+  };
+  image_file: {
+    image_name: string;
+    image_url: string;
+  };
   entity_id: string;
 };

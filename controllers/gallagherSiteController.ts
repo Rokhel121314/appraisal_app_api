@@ -10,7 +10,6 @@ export const addGallagherSite = async (req: Request, res: Response) => {
   try {
     const site = await GallagherSite.create(payload);
     res.status(200).json({
-      entity_site_building_number: site.entity_site_building_number,
       site_number: site.site_number,
       site_name: site.site_name,
       site_address: site.site_address,
@@ -61,6 +60,29 @@ export const addGallagherSite = async (req: Request, res: Response) => {
       exclusions: site.exclusions,
       rcn_per_area: site.rcn_per_area,
       bvs_type: site.bvs_type,
+
+      other_valuation_1: {
+        valuation_name: site.other_valuation_1?.valuation_name,
+        valuation_amount: site.other_valuation_1?.valuation_amount,
+      },
+      other_valuation_2: {
+        valuation_name: site.other_valuation_2?.valuation_name,
+        valuation_amount: site.other_valuation_2?.valuation_amount,
+      },
+
+      writeup_image_file: {
+        image_name: site.writeup_image_file?.image_name,
+        image_url: site.writeup_image_file?.image_url,
+      },
+      image_file: {
+        image_name: site.image_file?.image_name,
+        image_url: site.image_file?.image_url,
+      },
+      bvs_file: {
+        image_name: site.bvs_file?.pdf_name,
+        image_url: site.bvs_file?.pdf_url,
+      },
+
       entity_id: site.entity_id,
       date_created: site.createdAt,
       date_updated: site.updatedAt,
@@ -92,7 +114,6 @@ export const updateGallagherSite = async (req: Request, res: Response) => {
       res.status(404).json({ message: "FAILED TO UPDATE" });
     } else {
       res.status(200).json({
-        entity_site_building_number: site.entity_site_building_number,
         site_number: site.site_number,
         site_name: site.site_name,
         site_address: site.site_address,
@@ -143,6 +164,28 @@ export const updateGallagherSite = async (req: Request, res: Response) => {
         exclusions: site.exclusions,
         rcn_per_area: site.rcn_per_area,
         bvs_type: site.bvs_type,
+
+        other_valuation_1: {
+          valuation_name: site.other_valuation_1?.valuation_name,
+          valuation_amount: site.other_valuation_1?.valuation_amount,
+        },
+        other_valuation_2: {
+          valuation_name: site.other_valuation_2?.valuation_name,
+          valuation_amount: site.other_valuation_2?.valuation_amount,
+        },
+
+        writeup_image_file: {
+          image_name: site.writeup_image_file?.image_name,
+          image_url: site.writeup_image_file?.image_url,
+        },
+        image_file: {
+          image_name: site.image_file?.image_name,
+          image_url: site.image_file?.image_url,
+        },
+        bvs_file: {
+          image_name: site.bvs_file?.pdf_name,
+          image_url: site.bvs_file?.pdf_url,
+        },
         entity_id: site.entity_id,
         date_created: site.createdAt,
         date_updated: site.updatedAt,
@@ -164,7 +207,6 @@ export const addManyGallagherSite = async (req: Request, res: Response) => {
     res.status(200).json(
       manySites.map((site) => {
         return {
-          entity_site_building_number: site.entity_site_building_number,
           site_number: site.site_number,
           site_name: site.site_name,
           site_address: site.site_address,
@@ -215,6 +257,28 @@ export const addManyGallagherSite = async (req: Request, res: Response) => {
           exclusions: site.exclusions,
           rcn_per_area: site.rcn_per_area,
           bvs_type: site.bvs_type,
+
+          other_valuation_1: {
+            valuation_name: site.other_valuation_1?.valuation_name,
+            valuation_amount: site.other_valuation_1?.valuation_amount,
+          },
+          other_valuation_2: {
+            valuation_name: site.other_valuation_2?.valuation_name,
+            valuation_amount: site.other_valuation_2?.valuation_amount,
+          },
+
+          writeup_image_file: {
+            image_name: site.writeup_image_file?.image_name,
+            image_url: site.writeup_image_file?.image_url,
+          },
+          image_file: {
+            image_name: site.image_file?.image_name,
+            image_url: site.image_file?.image_url,
+          },
+          bvs_file: {
+            image_name: site.bvs_file?.pdf_name,
+            image_url: site.bvs_file?.pdf_url,
+          },
           entity_id: site.entity_id,
           date_created: site.createdAt,
           date_updated: site.updatedAt,
@@ -259,13 +323,12 @@ export const viewGallagherSiteOfEntity = async (
       res.status(404).json({ message: "NO SITES FOUND!" });
     } else {
       const filtered_sites_list = sites.sort((a, b) =>
-        a.entity_site_building_number > b.entity_site_building_number ? 1 : -1
+        a.site_number > b.site_number ? 1 : -1
       );
 
       res.status(200).json(
         filtered_sites_list.map((site) => {
           return {
-            entity_site_building_number: site.entity_site_building_number,
             site_number: site.site_number,
             site_name: site.site_name,
             site_address: site.site_address,
@@ -316,6 +379,28 @@ export const viewGallagherSiteOfEntity = async (
             exclusions: site.exclusions,
             rcn_per_area: site.rcn_per_area,
             bvs_type: site.bvs_type,
+
+            other_valuation_1: {
+              valuation_name: site.other_valuation_1?.valuation_name,
+              valuation_amount: site.other_valuation_1?.valuation_amount,
+            },
+            other_valuation_2: {
+              valuation_name: site.other_valuation_2?.valuation_name,
+              valuation_amount: site.other_valuation_2?.valuation_amount,
+            },
+
+            writeup_image_file: {
+              image_name: site.writeup_image_file?.image_name,
+              image_url: site.writeup_image_file?.image_url,
+            },
+            image_file: {
+              image_name: site.image_file?.image_name,
+              image_url: site.image_file?.image_url,
+            },
+            bvs_file: {
+              image_name: site.bvs_file?.pdf_name,
+              image_url: site.bvs_file?.pdf_url,
+            },
             entity_id: site.entity_id,
             date_created: site.createdAt,
             date_updated: site.updatedAt,
